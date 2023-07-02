@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType Condition="'$(Configuration)' == 'Debug'">Exe</OutputType>
+		<OutputType Condition="'$(Configuration)' == 'Release'">WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<StartupObject>Moo.Notifications.Notifier</StartupObject>
+		<ApplicationIcon>Images\GoogleChrome_64.ico</ApplicationIcon>
+		<AssemblyName>Google Chrome</AssemblyName>
+		<Platforms>x64</Platforms>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+		<WindowsPackageType>None</WindowsPackageType>
+		<SelfContained>true</SelfContained>
+		<EnableMsixTooling>true</EnableMsixTooling>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Notifications.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="publish\**" />
+	  <Content Remove="publish\**" />
+	  <EmbeddedResource Remove="publish\**" />
+	  <None Remove="publish\**" />
+	  <Page Remove="publish\**" />
+	  <PRIResource Remove="publish\**" />
+	</ItemGroup>
+		<ItemGroup>
+			<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+			<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" />
+			<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+	</ItemGroup>
+</Project>

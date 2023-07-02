@@ -1,0 +1,100 @@
+[
+  {
+	"ImagePath" : "BoozyMoo_Logo_2022_Black-Full-cropped.webp",
+	"Description": "Get a scoop of drunkenness with our 5 new flavors!",
+	"ButtonText": "Click here to order now",
+	"URL": "https://boozymoo.com",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "lubelife.jpg",
+	"Description": "Lube for life - 275 gallons! Live your best #LubeLife",
+	"ButtonText": "Slide into Amazon and buy now",
+	"URL": "https://www.amazon.com/LubeLife-Personal-Lubricant-Lube-Parabens/dp/B07FMLNVFF",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "horse.jpg",
+	"Description": "A riveting novel exploring the forbidden love between woman and horse",
+	"ButtonText": "Available now on Amazon in Kindle and paperback",
+	"URL": "https://www.amazon.com/dp/1291742751",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "macandcheese.jpg",
+	"Description": "Dinner is served for your extended family with our tub of mac and cheese",
+	"ButtonText": "Buy now on Amazon",
+	"URL": "https://www.amazon.com/dp/B00PUR9P4A",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "inflatablecow.jpg",
+	"Description": "Your very own blow-up moo friend",
+	"ButtonText": "Buy now on Amazon",
+	"URL": "https://www.amazon.com/dp/B07RN8ZRSZ",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "deesnuts.jpg",
+	"Description": "Get a load of some banana and Dee\u0027s Nuts in your mouth",
+	"ButtonText": "Buy now on Amazon and get munching",
+	"URL": "https://www.amazon.com/dp/B0711VH896",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "blobfish.jpg",
+	"Description": "Cuddle your own cute little blobfish",
+	"ButtonText": "Buy now on Amazon",
+	"URL": "https://www.amazon.com/Hashtag-Collectibles-Stuffed-Blobfish-Plush/dp/B00JBQKY46",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "taxidermyrat.jpg",
+	"Description": "Check out this cute rat reading a newspaper",
+	"ButtonText": "Shop now on Etsy",
+	"URL": "https://www.etsy.com/listing/851187312/taxidermy-mouse-rat-rodent-reading-on",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "pizza.jpg",
+	"Description": "You need this little guy in your life",
+	"ButtonText": "Get your pizza fix now on Etsy",
+	"URL": "https://www.etsy.com/listing/929469476/original-pizza-nightmare-wall-hanging",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "moomooexpress.jpg",
+	"Description": "Come on down to Moo Moo Express Car Wash",
+	"ButtonText": "Visit us now and claim your $5 express wash",
+	"URL": "https://moomoocarwash.com/",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "lemoo.webp",
+	"Description": "Le Moo Fine Steak House",
+	"ButtonText": "View our menus",
+	"URL": "https://www.lemoorestaurant.com/",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "thegreatrace.jpg",
+	"Description": "Check out this fine spoon with little swimmers racing to get inside",
+	"ButtonText": "Click here to get yours now",
+	"URL": "https://www.etsy.com/listing/69722597/the-great-race-wood-spoon?show_sold_out_detail=1&ref=nla_listing_details",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "corkscrewspoon.jpg",
+	"Description": "Get a twister inside your mouth with this wacky spoon",
+	"ButtonText": "Click here to get yours now",
+	"URL": "https://www.etsy.com/listing/216278781/sprung-hand-carved-wooden-spoon-by?show_sold_out_detail=1&ref=nla_listing_details",
+	"Enabled": true
+  },
+  {
+	"ImagePath" : "bonespoon.jpg",
+	"Description": "Get a bone in your mouth with this fine culinary instrument",
+	"ButtonText": "Click here to get yours now",
+	"URL": "https://www.etsy.com/listing/216278781/sprung-hand-carved-wooden-spoon-by?show_sold_out_detail=1&ref=nla_listing_details",
+	"Enabled": true
+  }
+]

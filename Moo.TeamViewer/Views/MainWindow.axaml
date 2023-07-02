@@ -1,0 +1,100 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Moo.TeamViewer.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="275" d:DesignHeight="215"
+        x:Class="Moo.TeamViewer.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Moo.TeamViewer"
+        Width="275"
+        Height="215"
+		TransparencyLevelHint="Transparent"
+        Background="Transparent"
+		SystemDecorations="None"
+		ZIndex="-1"
+		Topmost="True"
+		ShowInTaskbar="False"
+		>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="Auto, *">
+        <Grid Background="Transparent" Grid.Column="0" RowDefinitions="Auto, Auto, Auto" Width="25">
+            <Canvas Grid.Row="0" Background="Transparent" Opacity="1" Height="115"/>
+            <Grid Grid.Row="1" Background="Transparent" Height="60">
+                <StackPanel Background="Transparent">
+                    <Canvas Background="#fffffd" Opacity="0" Height="0"></Canvas>
+                    <Border Background="#fffffd" Opacity="1" CornerRadius="3, 0, 0, 0" ZIndex="1">
+                    <Grid Background="Transparent" Opacity="1">
+                        <Button Height="20" Width="20" Background="#fffffd" HorizontalAlignment="Center" Margin="2, 2"/>
+                        <TextBlock Text=">" Height="18" FontSize="15" FontWeight="Bold" Foreground="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 1, 3"></TextBlock>
+                    </Grid>
+                    </Border>
+                    <Border RenderTransform="rotate(45deg) translate(11px, -16px)" Background="#fffffd" Opacity="1" CornerRadius="30, 0, 2, 16" Height="40" Width="44" ZIndex="0">
+                    <Canvas Background="Transparent" Opacity="0" Height="30"></Canvas>
+                        </Border>
+                </StackPanel>
+            </Grid>
+            <Canvas Grid.Row="2" Background="Transparent" Opacity="1" Height="50"/>
+        </Grid>
+        <Grid Grid.Column="1" RowDefinitions="Auto, Auto, Auto">
+            <Grid Grid.Row="0" Height="105" Background="#0065c7">
+                <Grid RowDefinitions="Auto, Auto">
+                    <Grid Grid.Row="0" Height="65" ColumnDefinitions="Auto, Auto, Auto">
+                        <Grid Grid.Column="0" Width="55" Background="#0065c7">
+                            <Image Height="42" Width="42" Source="avares://Moo.TeamViewer/Assets/logo.png" Margin="0,-12,0,0"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Width="155" Background="#0065c7">
+                            <Grid RowDefinitions="*, Auto, Auto">
+                                <Grid Grid.Row="0" ColumnDefinitions="*, *" VerticalAlignment="Top" Margin="0, 0, 0, 0">
+                                    <TextBlock Grid.Column="0" Text="Team" Foreground="#fffffd" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0, 0, 11, -8"/>
+                                    <TextBlock Grid.Column="1" Text="Viewer" Foreground="#fffffd" FontSize="22" FontWeight="SemiLight" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-11, 16, 0, -8"/>
+                                </Grid>
+                                <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Free license (non-commercial" Foreground="#fffffd" FontSize="10" FontWeight="SemiLight" Margin="3, 0, 0, 0"/>
+                                <TextBlock Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Text="use only)" Foreground="#fffffd" FontSize="10" FontWeight="SemiLight" Margin="3, 0, 0, 0"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="2" Width="40" Background="#0065c7">
+                            <Button Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="X" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#fffffd" FontWeight="Heavy"/>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <StackPanel Margin="4, 0, 0, 2" Height="38" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image Source="avares://Moo.TeamViewer/Assets/camera.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                        <Image Source="avares://Moo.TeamViewer/Assets/headset.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                        <Image Source="avares://Moo.TeamViewer/Assets/chat.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                        <Image Source="avares://Moo.TeamViewer/Assets/documents.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                        <Image Source="avares://Moo.TeamViewer/Assets/brush.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                        <Image Source="avares://Moo.TeamViewer/Assets/arrows.png" VerticalAlignment="Center" Height="18" Width="18" Margin="8, 0"></Image>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" RowDefinitions="Auto, *" Height="80" Background="#fffffd">
+                <StackPanel Grid.Row="0" Height="30" Orientation="Horizontal" Background="#fffffd">
+                    <Image Height="16" Width="16" VerticalAlignment="Center" Source="/Assets/dropdown.png" Margin="4"></Image>
+                    <TextBlock Height="16" FontSize="14" FontFamily="Segoe UI" Margin="0" VerticalAlignment="Center">Session list</TextBlock>
+                    <Canvas Width="132" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Canvas>
+                    <Image Width="22" Height="18" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 2" Source="/Assets/settings.png"></Image>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" VerticalAlignment="Center" Background="#fffffd">
+                    <Image VerticalAlignment="Center" Width="20" Height="20" Source="/Assets/profilepic.png" Margin="6, 2, 4, 0"></Image>
+                    <TextBlock VerticalAlignment="Center" FontFamily="Segoe UI" Text="SJAMES (1 337 069 420)" FontSize="11"></TextBlock>
+                    <Canvas Width="40"></Canvas>
+					<Image Height="20" Width="20" Source="avares://Moo.TeamViewer/Assets/dropdown.png"/>
+					<Image Height="18" Width="18" Source="avares://Moo.TeamViewer/Assets/cursor.png" Margin="-2, 0, -2, -1"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" Height="30" Background="#40413e">
+                <TextBlock Text="www.teamviewer.com" FontSize="12" FontFamily="Arial" FontWeight="Thin" TextDecorations="Underline" Foreground="#fffffd" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="9, 5, 9, 0"></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</Window>

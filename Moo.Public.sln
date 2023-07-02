@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moo.CustomFakeNotification", "Moo.CustomFakeNotification\Moo.CustomFakeNotification.csproj", "{13A45A06-E170-4EF8-83C3-DA143C295D45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moo.Notifications", "Moo.Notifications\Moo.Notifications.csproj", "{CE4A51FF-C233-4438-A732-4852CB4C875A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moo.Update", "Moo.Update\Moo.Update.csproj", "{56FBECA1-F84F-4244-9A8B-21F2A5EA4C77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moo.TeamViewer", "Moo.TeamViewer\Moo.TeamViewer.csproj", "{556046DE-D036-4920-AB93-55E50B0619F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13A45A06-E170-4EF8-83C3-DA143C295D45}.Release|x64.ActiveCfg = Release|x64
+		{13A45A06-E170-4EF8-83C3-DA143C295D45}.Release|x64.Build.0 = Release|x64
+		{13A45A06-E170-4EF8-83C3-DA143C295D45}.Debug|x64.ActiveCfg = Debug|x64
+		{13A45A06-E170-4EF8-83C3-DA143C295D45}.Debug|x64.Build.0 = Debug|x64
+		{CE4A51FF-C233-4438-A732-4852CB4C875A}.Release|x64.ActiveCfg = Release|x64
+		{CE4A51FF-C233-4438-A732-4852CB4C875A}.Release|x64.Build.0 = Release|x64
+		{CE4A51FF-C233-4438-A732-4852CB4C875A}.Debug|x64.ActiveCfg = Debug|x64
+		{CE4A51FF-C233-4438-A732-4852CB4C875A}.Debug|x64.Build.0 = Debug|x64
+		{56FBECA1-F84F-4244-9A8B-21F2A5EA4C77}.Release|x64.ActiveCfg = Release|x64
+		{56FBECA1-F84F-4244-9A8B-21F2A5EA4C77}.Release|x64.Build.0 = Release|x64
+		{56FBECA1-F84F-4244-9A8B-21F2A5EA4C77}.Debug|x64.ActiveCfg = Debug|x64
+		{56FBECA1-F84F-4244-9A8B-21F2A5EA4C77}.Debug|x64.Build.0 = Debug|x64
+		{556046DE-D036-4920-AB93-55E50B0619F8}.Debug|x64.ActiveCfg = Debug|x64
+		{556046DE-D036-4920-AB93-55E50B0619F8}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+EndGlobal

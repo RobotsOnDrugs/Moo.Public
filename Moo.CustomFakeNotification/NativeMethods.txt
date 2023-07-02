@@ -1,0 +1,13 @@
+ClipCursor
+SetWindowLongPtr
+SetWindowPos
+WINDOW_LONG_PTR_INDEX
+WINDOW_EX_STYLE
+MoveWindow
+SystemParametersInfoW
+EnumDisplayMonitors
+GetWindowDC
+HMONITOR
+MONITORINFO
+MONITORINFOEXW
+GetMonitorInfo

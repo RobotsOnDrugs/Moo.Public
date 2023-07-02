@@ -1,0 +1,33 @@
+<Window
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:vm="using:Moo.Update.ViewModels"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ring="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	x:Class="Moo.Update.Views.MainWindow"
+	Icon="/Assets/moo-icon-64.ico"
+	Title="Windows Update"
+	ExtendClientAreaToDecorationsHint="False"
+	WindowState="FullScreen"
+	SystemDecorations="None"
+	ShowInTaskbar="False"
+	Topmost="True"
+	ShowActivated="True"
+	ZIndex="-1">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Grid ColumnDefinitions="*" Background="DodgerBlue">
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<ring:ProgressRing Name="ProgressRing" Width="80" Height="80" IsActive="True" Foreground="White" Margin="10,20,0,0"/>
+			<TextBlock Text=" " FontFamily="Segoe UI" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+			<TextBlock Name="Stage" Text="{Binding UpdateMessage}" FontFamily="Segoe UI" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+			<TextBlock Name="TurnOff" Text="{Binding TurnOffMessage}" FontFamily="Segoe UI" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+			<TextBlock Name="ProgressIndicator" Text="{Binding ProgressString}" FontFamily="Segoe UI" FontSize="22" Foreground="White" HorizontalAlignment="Center"/>
+		</StackPanel>
+	</Grid>
+</Window>
