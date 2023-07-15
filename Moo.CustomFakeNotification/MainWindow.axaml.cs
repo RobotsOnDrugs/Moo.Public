@@ -92,6 +92,6 @@ public partial class MainWindow : Window
 		}
 	}
 
-	private HWND GetHandleVanara() => PlatformImpl!.Handle.Handle;
+	private HWND GetHandleVanara() => this.TryGetPlatformHandle();
 	private Windows.Win32.Foundation.HWND GetHandleCsWin32() => (Windows.Win32.Foundation.HWND)PlatformImpl!.Handle.Handle;
 }

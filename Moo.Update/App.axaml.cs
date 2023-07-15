@@ -1,8 +1,11 @@
+#define FAST
+
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 
 using System.Diagnostics.CodeAnalysis;
+
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 #if RELEASE
@@ -15,6 +18,9 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using NLog.Targets;
 using NLog;
 using NLog.Config;
+
+using HWND = Windows.Win32.Foundation.HWND;
+using RECT = Windows.Win32.Foundation.RECT;
 
 namespace Moo.Update;
 public partial class App : Application
@@ -47,22 +53,22 @@ public partial class App : Application
 		try
 		{
 			string JSONOptions = File.ReadAllText("AppSettings.json");
-			AppOptions _opts = JsonSerializer.Deserialize<AppOptions>(JSONOptions)!;
+			AppOptions _opts = JsonSerializer.Deserialize<AppOptions>(JSONOptions);
 			Options = new() { NotificationTime = _opts.NotificationTime };
 		}
 		catch (Exception ex)
 		{
-			logger.Error(ex);
-			logger.Error("[App config] Using configuration defaults.");
+			Logger.Error(ex);
+			Logger.Error("[App config] Using configuration defaults.");
 		}
 #endif
 		if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 		{
+#if FAST
+			bool toast_activated = true;
+#else
 			bool toast_activated = desktop.Args is not null && desktop.Args.Length != 0 && desktop.Args[0] is "--no-notify";
-			//if (!toast_activated)
-			//	_ = Parser.Default.ParseArguments<GlobalOptions>(desktop.Args).MapResult(
-			//		(options) => { AppOptions = options; return 0; },
-			//		(_) => { Environment.Exit(-2); return -2; });
+#endif
 
 			if (toast_activated)
 			{
@@ -75,11 +81,11 @@ public partial class App : Application
 				MainWindowHandle = _mwindow.GetHandle();
 				nint _ = SetWindowLongPtr(MainWindowHandle, WINDOW_LONG_PTR_INDEX.GWL_EXSTYLE, (nint)(WINDOW_EX_STYLE.WS_EX_TOPMOST | WINDOW_EX_STYLE.WS_EX_NOREDIRECTIONBITMAP | WINDOW_EX_STYLE.WS_EX_TOOLWINDOW));
 #if RELEASE
-			FunnyStuff.InitLogging();
-			if (mwindow.AggressiveWindowHiding)
-				FunnyStuff.FuckUpWindows();
-			else
-				FunnyStuff.HideWindows();
+				FunnyStuff.InitLogging();
+				if (_mwindow.AggressiveWindowHiding)
+					FunnyStuff.FuckUpWindows();
+				else
+					FunnyStuff.HideWindows();
 #endif
 			}
 			else

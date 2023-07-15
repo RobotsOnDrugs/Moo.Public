@@ -1,3 +1,6 @@
+#define FAST
+
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 using Avalonia.Input;
@@ -7,14 +10,17 @@ using NLog;
 using NLog.Targets;
 
 using System.IO;
-using System.Text.Json;
-#if RELEASE
 using System.Runtime.InteropServices;
+using System.Text.Json;
+
+using Vanara.Extensions;
+using Vanara.Security.AccessControl;
+
+#if RELEASE
 using Windows.Win32.System.Shutdown;
 #endif
 
 namespace Moo.Update.Views;
-
 [SuppressMessage("ReSharper", "AccessToModifiedClosure")]
 public partial class MainWindow : Window
 {
@@ -34,12 +40,24 @@ public partial class MainWindow : Window
 	public MainWindow()
 	{
 		LogManager.Configuration.AddRule(LogLevel.Info, LogLevel.Fatal, DefaultLogfileConfig);
+		Process cur_proc = Process.GetCurrentProcess();
+		try
+		{
+			cur_proc.EnablePrivilege(SystemPrivilege.Shutdown);
+		}
+		catch (Exception e)
+		{
+			logger.Info(e);
+			LogManager.Flush();
+			LogManager.Shutdown();
+			throw;
+		}
 		try
 		{
 			// ReSharper disable once InconsistentNaming
 			string JSONOptions = File.ReadAllText("WindowSettings.json");
-			MainWindowOptions mwo = JsonSerializer.Deserialize<MainWindowOptions>(JSONOptions)!;
-			WindowOptions = new MainWindowOptions()
+			MainWindowOptions mwo = JsonSerializer.Deserialize<MainWindowOptions>(JSONOptions);
+			WindowOptions = new()
 			{
 				AggressiveWindowHiding = mwo.AggressiveWindowHiding,
 				UpdateSpeedPre90IntervalMax = mwo.UpdateSpeedPre90IntervalMax,
@@ -78,22 +96,24 @@ public partial class MainWindow : Window
 			return;
 		}
 		_alt_key_pressed++;
-		if (_alt_key_pressed > 2)
+		if (_alt_key_pressed <= 2) return;
+		KeyUp -= ExitWithAlt;
+		try
 		{
-			KeyUp -= ExitWithAlt;
-			try
-			{
-				logger.Info("[MainWindow] Undoing window damage.");
-				UndoWindowHide();
-			}
-			catch (Exception ex) { logger.Error(ex); }
-			LogManager.Flush();
-			LogManager.Shutdown();
-			Environment.Exit(0);
+			logger.Info("[MainWindow] Undoing window damage.");
+			UndoWindowHide();
 		}
+		catch (Exception ex) { logger.Error(ex); }
+		LogManager.Flush();
+		LogManager.Shutdown();
+		Environment.Exit(0);
 	}
 	private async Task MakeProgress()
 	{
+		int delay_multiplier = 60;
+#if FAST
+		delay_multiplier = 1;
+#endif
 		int progress_percentage = 0;
 		AvaloniaProgressRing.ProgressRing progress_ring = this.FindControl<AvaloniaProgressRing.ProgressRing>("ProgressRing")!;
 		TextBlock stage_tb = this.FindControl<TextBlock>("Stage")!;
@@ -108,7 +128,7 @@ public partial class MainWindow : Window
 			while (progress_percentage < 90)
 			{
 #if RELEASE
-				await Task.Delay(rand.Next(WindowOptions.UpdateSpeedPre90Min * 60 * 1000, WindowOptions.UpdateSpeedPre90Max * 60 * 1000));
+				await Task.Delay(rand.Next(WindowOptions.UpdateSpeedPre90Min * delay_multiplier * 1000, WindowOptions.UpdateSpeedPre90Max * delay_multiplier * 1000));
 #else
 				await Task.Delay(1 * 100);
 #endif
@@ -124,7 +144,7 @@ public partial class MainWindow : Window
 			while (true)
 			{
 #if RELEASE
-				await Task.Delay(rand.Next(WindowOptions.UpdateSpeedPost90Min * 60 * 1000, WindowOptions.UpdateSpeedPost90Max * 60 * 1000));
+				await Task.Delay(rand.Next(WindowOptions.UpdateSpeedPost90Min * delay_multiplier * 1000, WindowOptions.UpdateSpeedPost90Max * delay_multiplier * 1000));
 #else
 				await Task.Delay(1 * 1000);
 #endif
@@ -138,6 +158,14 @@ public partial class MainWindow : Window
 				progress_tb.Text = $"{progress_percentage}% complete";
 			}
 		}
+#if FAST
+		await ProgressScript();
+		progress_ring.IsActive = false;
+		progress_tb.Text = "";
+		stage_tb.Text = "";
+		turnoff_tb.Text = "Restarting to finish updates...";
+		await Task.Delay(3000);
+#else
 		await ProgressScript();
 		stage_tb.Text = "There was an unexpected error, rolling back";
 		await Task.Delay(5 * 1000);
@@ -150,6 +178,7 @@ public partial class MainWindow : Window
 		turnoff_tb.Text = "The system must restart to retry";
 		await Task.Delay(10000);
 		LogManager.Flush();
+#endif
 #if DEBUG
 		LogManager.Shutdown();
 		Environment.Exit(0);
@@ -169,12 +198,12 @@ public partial class MainWindow : Window
 	private void Persist()
 	{
 		//FunnyStuff.FuckUpWindows();
-		_ = SetWindowPos(GetHandle(), (HWND)(-1), 0, 0, App.ScreenResolution().Width, App.ScreenResolution().Height, SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW);
+		_ = SetWindowPos(GetHandle(), (Windows.Win32.Foundation.HWND)(-1), 0, 0, App.ScreenResolution().Width, App.ScreenResolution().Height, SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW);
 		_ = ClipCursor(App.ScreenBottomCorner());
 		_ = SetCursor(null);
 	}
 #endif
-	public HWND GetHandle() => (HWND)PlatformImpl!.Handle.Handle;
+	public Windows.Win32.Foundation.HWND GetHandle() => (Windows.Win32.Foundation.HWND)TryGetPlatformHandle()!.Handle;
 
 	private readonly record struct MainWindowOptions
 	{
